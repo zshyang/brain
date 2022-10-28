@@ -1,0 +1,23 @@
+version: '3.8'
+services:
+  pnvae_shapenet:
+    build: 
+      context: ./vae/
+    container_name: pnvae_shapenet
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              device_ids: ['0']
+              capabilities: [gpu]
+    image: dadadadockerer/pnvae_shapenet:train
+    ports:
+      - 5566:5566
+    restart: always
+    stdin_open: true
+    tty: true
+    volumes:
+      - ../src/:/workspace/
+      - /home/george/George/datasets/:/datasets/
+      - /home/george/George/projects/base/runtime/:/runtime/
