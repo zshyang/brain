@@ -24,3 +24,5 @@ def m2obj(m_file, obj_file):
         for face in faces:
             file.write("f {} {} {}\n".format(face[0], face[1], face[2]))
 
+if __name__ == '__main__':
+    pass
