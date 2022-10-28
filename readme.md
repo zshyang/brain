@@ -10,3 +10,5 @@ generate the docker image with the following command line:
 ```bash
 docker-compose build brain
 ```
+
+Next step is to generate data with obj format and visuliza some of them.
