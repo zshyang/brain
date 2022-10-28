@@ -12,3 +12,17 @@ docker-compose build brain
 ```
 
 Next step is to generate data with obj format and visuliza some of them.
+
+make the image up online
+```bash
+docker-compose up -d brain
+```
+enter the container
+```bash
+docker exec -it brain bash
+```
+
+debug inside of a docker container
+```
+python -m debugpy --listen 0.0.0.0:5566 --wait-for-client generate_obj.py
+```
