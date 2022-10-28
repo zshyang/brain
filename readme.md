@@ -35,3 +35,7 @@ george@La:~/Projects/brain/workspace$ sudo chown -R george:george obj
 There is a problem with the mesh. the mesh is not watertight.
 ![over all figure](fig/whole.png)
 ![detail figure](fig/crack.png)
+
+
+copy the manifold to excute the manifold and simplification.
+
