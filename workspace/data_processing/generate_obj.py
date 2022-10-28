@@ -20,7 +20,7 @@ def m2obj(m_file, obj_file):
     with open(m_file, "r") as file:
         for line in file:
             if line[0] == "V":
-                vert = parse("Vertex {} {:f} {:f} {:f} {}", line)
+                vert = parse("Vertex {:d} {} {} {} {}", line)
                 verts.append([vert[1], vert[2], vert[3]])
             if line[0] == "F":
                 face = parse("Face {} {:d} {:d} {:d}{}", line)
@@ -36,15 +36,12 @@ def m2obj(m_file, obj_file):
 
 
 def main():
-    print(glob('../MMS/AD_pos/l/*.m'))
     list_m_file_path = glob('../MMS/*/l/*.m')
     for m_file_path in list_m_file_path:
         obj_file_path = m_file_path.replace('MMS', 'obj')
         obj_file_path = obj_file_path.replace('.m', '.obj')
         m2obj(m_file_path, obj_file_path)
         break
-
-    pass
 
 
 if __name__ == '__main__':
