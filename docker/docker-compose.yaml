@@ -19,3 +19,4 @@ services:
     tty: true
     volumes:
       - ../src/:/workspace/
+      - ../runtime/:/runtime/
