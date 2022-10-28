@@ -1,9 +1,9 @@
 version: '3.8'
 services:
-  pnvae_shapenet:
-    build: 
-      context: ./vae/
-    container_name: pnvae_shapenet
+  brain:
+    build:
+      context: .
+    container_name: brain
     deploy:
       resources:
         reservations:
@@ -11,7 +11,7 @@ services:
             - driver: nvidia
               device_ids: ['0']
               capabilities: [gpu]
-    image: dadadadockerer/pnvae_shapenet:train
+    image: dadadadockerer/brain:0.1
     ports:
       - 5566:5566
     restart: always
