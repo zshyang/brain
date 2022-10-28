@@ -19,5 +19,3 @@ services:
     tty: true
     volumes:
       - ../src/:/workspace/
-      - /home/george/George/datasets/:/datasets/
-      - /home/george/George/projects/base/runtime/:/runtime/
