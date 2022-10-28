@@ -26,3 +26,9 @@ debug inside of a docker container
 ```
 python -m debugpy --listen 0.0.0.0:5566 --wait-for-client generate_obj.py
 ```
+
+make the generate folder belong to my group
+```bash
+george@La:~/Projects/brain/workspace$ sudo chown -R george:george obj
+```
+
