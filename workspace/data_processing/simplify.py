@@ -1,8 +1,10 @@
 import os
 from glob import glob
 
+from tqdm import tqdm
+
 SIMPLIFY_PATH = 'manifold/simplify'
-TARGET_FACE_NUM = 2048
+TARGET_FACE_NUM = 2048 * 4
 
 def get_path(obj_file):
     split_path = obj_file.split('/')
@@ -22,7 +24,7 @@ def generate_file(obj_file, simplified_mesh_path):
 
 def main():
     list_obj_file = glob('../manifold/*/l/*.obj')
-    for obj_file in list_obj_file:
+    for obj_file in tqdm(list_obj_file):
         path = get_path(obj_file)
         generate_file(obj_file, path)
 

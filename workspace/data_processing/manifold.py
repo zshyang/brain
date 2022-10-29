@@ -1,6 +1,8 @@
 import os
 from glob import glob
 
+from tqdm import tqdm
+
 WT_PATH = 'manifold/manifold'
 
 def get_manifold_path(obj_file):
@@ -21,11 +23,9 @@ def generate_manifold_file(obj_file, manifold_path):
 
 def main():
     list_obj_file = glob('../obj/*/l/*.obj')
-    for obj_file in list_obj_file:
+    for obj_file in tqdm(list_obj_file):
         manifold_path = get_manifold_path(obj_file)
         generate_manifold_file(obj_file, manifold_path)
-    print(list_obj_file)
-    pass
 
 
 if __name__ == '__main__':

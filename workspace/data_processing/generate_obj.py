@@ -1,6 +1,8 @@
-from parse import parse
-from glob import glob
 import os
+from glob import glob
+
+from parse import parse
+from tqdm import tqdm
 
 
 def make_file_folder(file_path):
@@ -37,11 +39,10 @@ def m2obj(m_file, obj_file):
 
 def main():
     list_m_file_path = glob('../MMS/*/l/*.m')
-    for m_file_path in list_m_file_path:
+    for m_file_path in tqdm(list_m_file_path):
         obj_file_path = m_file_path.replace('MMS', 'obj')
         obj_file_path = obj_file_path.replace('.m', '.obj')
         m2obj(m_file_path, obj_file_path)
-        break
 
 
 if __name__ == '__main__':
