@@ -39,3 +39,6 @@ There is a problem with the mesh. the mesh is not watertight.
 
 copy the manifold to excute the manifold and simplification.
 
+There are totally 841 mesh files.
+
+Next step is to make the simplified mesh file into npy files.
