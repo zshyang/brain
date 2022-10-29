@@ -1,4 +1,5 @@
 workspace/MMS/*
 workspace/obj/
 workspace/manifold/
+workspace/simplified/
 runtime/
