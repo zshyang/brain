@@ -11,10 +11,14 @@ data:
   train:
     dataset:
       params:
+        debug: true
         placeholder: null
       # from_basic_blocks: datasets/shapenetpart/meshnet2/ssl_mae/train.yaml
     dataloader:
-      # from_basic_blocks: dataloaders/modelnet40/meshnet2/ssl_rec_att/train.yaml
+      collate_fn: __collate__
+      batch_size: 64
+      num_workers: 0
+      drop_last: 0
   val: null
   test: null
 model:
