@@ -11,7 +11,7 @@ import random
 
 import numpy as np
 import torch
-from datasets import Dataset
+from dataset import Dataset
 
 from options import options, update_options
 
@@ -49,14 +49,14 @@ if __name__ == '__main__':
     # dataset = 
     # self.opt = opt
 
-    import lib.datasets as dataset
-    dataset_lib = self.opt.dataset.lib
-    self.dataset = getattr(
-        dataset, dataset_lib
-    )(
-        **self.opt.dataset.params
-    )
-    dataset = 
+    # import lib.datasets as dataset
+    # dataset_lib = self.opt.dataset.lib
+    # self.dataset = getattr(
+    #     dataset, dataset_lib
+    # )(
+    #     **self.opt.dataset.params
+    # )
+    train_dataset = Dataset(**options.data.train.dataset.params)
 
     self.collate_fn = getattr(
         collateFunctions, 
