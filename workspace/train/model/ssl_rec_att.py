@@ -11,9 +11,8 @@ logs:
 '''
 import torch
 import torch.nn as nn
-from lib.models.modelnet40.meshnet2.meshnet2_attention import \
-    NetworkBeforeLinear
-from lib.models.modelnet40.meshnet2.pnvae import PointNetDecoder
+from model.meshnet2_attention import NetworkBeforeLinear
+from model.pnvae import PointNetDecoder
 
 
 class Network(nn.Module):
