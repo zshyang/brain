@@ -11,6 +11,7 @@ import random
 
 import numpy as np
 import torch
+from datasets import Dataset
 
 from options import options, update_options
 
@@ -55,6 +56,7 @@ if __name__ == '__main__':
     )(
         **self.opt.dataset.params
     )
+    dataset = 
 
     self.collate_fn = getattr(
         collateFunctions, 
