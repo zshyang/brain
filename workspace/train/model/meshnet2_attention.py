@@ -52,11 +52,11 @@ logs:
 '''
 import torch
 import torch.nn as nn
-from lib.models.mesh.basic_transformer import (TransformerEncoder,
-                                              TransformerEncoderLayer)
-from lib.models.meshnet.layers import MaxPoolFaceFeature
-from lib.models.meshnet.spatial_descriptor import PointDescriptor
-from lib.models.meshnet.structural_descriptor import (ConvSurface,
+# from lib.models.mesh.basic_transformer import (TransformerEncoder,
+#                                               TransformerEncoderLayer)
+from model.layers import MaxPoolFaceFeature
+from model.spatial_descriptor import PointDescriptor
+from model.structural_descriptor import (ConvSurface,
                                                      NormalDescriptor)
 import math
 
