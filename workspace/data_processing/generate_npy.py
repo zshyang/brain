@@ -1,4 +1,4 @@
-''' generate npy files
+''' generate npy files in place
 
 author:
     zhangsihao yang
@@ -20,12 +20,16 @@ from utils import fpath, is_mesh_valid, normalize_mesh, pytorch3D_mesh
 
 device = torch.device('cpu:0')
 # To process the dataset enter the path where they are stored
-data_root = '/datasets/shapenet/part/mesh/aligned'
-max_faces = 1024
+data_root = '../simplified'
+max_faces = 1024 * 8
+
 if not os.path.exists(data_root):
     raise Exception('Dataset not found at {0}'.format(data_root))
 
 fpath_data = fpath(data_root)
+
+# print(len(fpath_data))
+# print(fpath_data.sdfs())
 
 for path in tqdm(fpath_data):
 
