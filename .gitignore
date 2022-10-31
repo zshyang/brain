@@ -4,3 +4,4 @@ workspace/manifold/
 workspace/simplified/
 runtime/
 workspace/train/__pycache__
+workspace/sample_point
