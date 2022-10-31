@@ -85,6 +85,8 @@ class Dataset(data.Dataset):
             return a_tensor
 
         if point.shape[0] > 2048:
+            perm_index = np.random.permutation(point.shape[0])
+            point = point[perm_index, :]
             point = point[:2048]
         else:
             point = enrich_tensor(point)
