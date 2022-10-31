@@ -48,21 +48,10 @@ if __name__ == '__main__':
     # make the dataset
     train_dataset = Dataset(**options.data.train.dataset.params)
 
-    self.collate_fn = getattr(
-        collateFunctions, 
-        str(self.opt.dataloader.collate_fn),
-        None
-    )
-    if self.collate_fn is None:
-        self.collate_fn = getattr(self.dataset, str(self.opt.dataloader.collate_fn), None)
+    collate_fn = getattr(train_dataset, str(options.data.train.dataloader.collate_fn), None)
 
-    self.sampler = torch.utils.data.DistributedSampler(
-        self.dataset, shuffle=True
-    )
-
-    self.dataloader = torch.utils.data.DataLoader(
+    train_dataloader = torch.utils.data.DataLoader(
         self.dataset, 
-        sampler=self.sampler,
         collate_fn=self.collate_fn,
         batch_size=self.opt.dataloader.batch_size,
         drop_last=bool(self.opt.dataloader.drop_last),
