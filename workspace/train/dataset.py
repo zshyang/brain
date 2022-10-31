@@ -34,11 +34,11 @@ class Dataset(data.Dataset):
     ''' this is a dataset only for test
     '''
     def __init__(self, **kwargs):
-        self.data_root = '/datasets/shapenet/part/mesh/aligned'
-        self.point_root = '/datasets/shapenet/part/shapenetcore_partanno_segmentation_benchmark_v0'
+        self.data_root = '/workspace/simplified/'
+        self.point_root = '/workspace/sample_point'
 
         list_npz_path= glob(
-            os.path.join(self.data_root, '*/*/aligned.npz')
+            os.path.join(self.data_root, '*/*/*.npz')
         )
 
         self.mesh_data_dict = {}
@@ -47,22 +47,24 @@ class Dataset(data.Dataset):
 
         for npz_path in tqdm(list_npz_path, desc='load point data'):
             mesh_index = npz_path.split('/')
-            # mesh_index = '/'.join([mesh_index[-3], mesh_index[-2]])
             point_path = os.path.join(
-                self.point_root, mesh_index[-3], 'points', f'{mesh_index[-2]}.pts'
+                self.point_root, mesh_index[-3], mesh_index[-2], 
+                f"{mesh_index[-1].split('.')[0]}.pts"
             )
-            try:
-                point = load_point(point_path)
-            except:
-                continue
-            mesh_index = '/'.join([mesh_index[-3], mesh_index[-2]])
+            point = load_point(point_path)
+            mesh_index = '/'.join(mesh_index)
             self.list_mesh_index.append(mesh_index)
             self.point_data_dict[mesh_index] = point
 
+            if kwargs.get('debug', False):
+                break
+
         for npz_path in tqdm(list_npz_path, desc='load mesh data'):
-            mesh_index = npz_path.split('/')
-            mesh_index = '/'.join([mesh_index[-3], mesh_index[-2]])
+            mesh_index = npz_path
             self.mesh_data_dict[mesh_index] = np.load(npz_path)
+
+            if kwargs.get('debug', False):
+                break
 
     def __len__(self):
         return len(self.list_mesh_index)
