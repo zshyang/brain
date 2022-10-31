@@ -6,8 +6,11 @@ author:
 logs:
     20221030    file created
 '''
+import argparse
+
 import numpy as np
 import torch
+from options import options, update_options
 
 
 def parse_args():
@@ -17,12 +20,6 @@ def parse_args():
     parser.add_argument(
         '--options',
         help=str_help, required=True, type=str
-    )
-
-    str_help = 'required by distributed training'
-    parser.add_argument(
-        '--local_rank',
-        help=str_help, type=int
     )
 
     args = parser.parse_args()
