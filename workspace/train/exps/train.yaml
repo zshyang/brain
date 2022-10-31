@@ -23,10 +23,41 @@ data:
   test: null
 model:
   # from_basic_blocks: models/modelnet40/meshnet2/ssl_mae/0_3.yaml
+  lib: Network
+  name: modelnet40_meshnet2_ssl_mae
+  params:
+    en_config:
+      num_faces: 1024
+      num_cls: 40
+      cfg: 
+        num_kernel: 64
+        ConvSurface:
+          num_samples_per_neighbor: 4
+          rs_mode: 'Weighted'
+          num_kernel: 64
+        MeshBlock:
+          blocks: [3, 4, 4]
+      pool_rate: 4
+      mask_percentage: 0.3
+    de_config:
+      bneck_size: 1024
 optim:
   # from_basic_blocks: optimizers/modelnet40/meshnet2/ssl_rec_att.yaml
+  name: 'Adam'
   params:
-    lr: 0.0002
+    lr: 1.0e-4
+    betas: [0.9,0.999]
+    eps: 1.0e-8
+    # the author mentioned set weight decay to 0 is very 
+    # important for completion task
+    weight_decay: 0.0
+  scheduler:
+    name: StepLR
+    params:
+      # step_size: 20
+      gamma: 0.5
+    params:
+      lr: 0.0002
   scheduler:
     name: MultiStepLR
     params:
