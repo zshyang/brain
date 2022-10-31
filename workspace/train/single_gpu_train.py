@@ -7,9 +7,11 @@ logs:
     20221030    file created
 '''
 import argparse
+import random
 
 import numpy as np
 import torch
+
 from options import options, update_options
 
 
@@ -44,7 +46,7 @@ if __name__ == '__main__':
 
     # make the dataset
     # dataset = 
-    self.opt = opt
+    # self.opt = opt
 
     import lib.datasets as dataset
     dataset_lib = self.opt.dataset.lib
