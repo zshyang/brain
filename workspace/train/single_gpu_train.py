@@ -46,16 +46,6 @@ if __name__ == '__main__':
     _fix_random(options.seed)
 
     # make the dataset
-    # dataset = 
-    # self.opt = opt
-
-    # import lib.datasets as dataset
-    # dataset_lib = self.opt.dataset.lib
-    # self.dataset = getattr(
-    #     dataset, dataset_lib
-    # )(
-    #     **self.opt.dataset.params
-    # )
     train_dataset = Dataset(**options.data.train.dataset.params)
 
     self.collate_fn = getattr(
