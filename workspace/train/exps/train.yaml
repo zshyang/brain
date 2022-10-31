@@ -10,6 +10,8 @@ seed: 0
 data:
   train:
     dataset:
+      params:
+        placeholder: null
       # from_basic_blocks: datasets/shapenetpart/meshnet2/ssl_mae/train.yaml
     dataloader:
       # from_basic_blocks: dataloaders/modelnet40/meshnet2/ssl_rec_att/train.yaml
