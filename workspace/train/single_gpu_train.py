@@ -39,3 +39,49 @@ def _fix_random(seed):
 
 if __name__ == '__main__':
     parse_args()
+
+    _fix_random(options.seed)
+
+    # make the dataset
+    # dataset = 
+    self.opt = opt
+
+    import lib.datasets as dataset
+    dataset_lib = self.opt.dataset.lib
+    self.dataset = getattr(
+        dataset, dataset_lib
+    )(
+        **self.opt.dataset.params
+    )
+
+    self.collate_fn = getattr(
+        collateFunctions, 
+        str(self.opt.dataloader.collate_fn),
+        None
+    )
+    if self.collate_fn is None:
+        self.collate_fn = getattr(self.dataset, str(self.opt.dataloader.collate_fn), None)
+
+    self.sampler = torch.utils.data.DistributedSampler(
+        self.dataset, shuffle=True
+    )
+
+    self.dataloader = torch.utils.data.DataLoader(
+        self.dataset, 
+        sampler=self.sampler,
+        collate_fn=self.collate_fn,
+        batch_size=self.opt.dataloader.batch_size,
+        drop_last=bool(self.opt.dataloader.drop_last),
+        num_workers=int(self.opt.dataloader.num_workers)
+    )
+    self.train_iter = iter(self.dataloader)
+
+    self.epoch = 0
+
+    # make the dataload
+
+    # make model
+
+    # make optimizer and scheduler
+
+    # train the network
