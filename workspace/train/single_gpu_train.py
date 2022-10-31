@@ -46,20 +46,18 @@ if __name__ == '__main__':
     _fix_random(options.seed)
 
     # make the dataset
-    train_dataset = Dataset(**options.data.train.dataset.params)
+    train_op = options.data.train
+    train_dataset = Dataset(**train_op.dataset.params)
 
-    collate_fn = getattr(train_dataset, str(options.data.train.dataloader.collate_fn), None)
+    collate_fn = getattr(train_dataset, str(train_op.dataloader.collate_fn), None)
 
     train_dataloader = torch.utils.data.DataLoader(
-        self.dataset, 
-        collate_fn=self.collate_fn,
-        batch_size=self.opt.dataloader.batch_size,
-        drop_last=bool(self.opt.dataloader.drop_last),
-        num_workers=int(self.opt.dataloader.num_workers)
+        train_dataset, 
+        collate_fn=collate_fn,
+        batch_size=train_op.dataloader.batch_size,
+        drop_last=bool(train_op.dataloader.drop_last),
+        num_workers=int(train_op.dataloader.num_workers)
     )
-    self.train_iter = iter(self.dataloader)
-
-    self.epoch = 0
 
     # make the dataload
 
