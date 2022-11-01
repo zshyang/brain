@@ -1,0 +1,6 @@
+lib: SHREC16
+name: shrec_theme
+params:
+  nb: 16
+  root: '/dataset/shrec16/shrec_16/'
+  split: 'test'

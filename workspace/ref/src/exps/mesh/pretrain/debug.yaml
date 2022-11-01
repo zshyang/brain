@@ -1,0 +1,4 @@
+based_on:
+  - default.yaml
+train:
+  max_epoch: 1

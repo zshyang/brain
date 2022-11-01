@@ -1,0 +1,5 @@
+lib: Dataset
+name: shapenetpart_meshnet2_ssl_mae_test_train
+params:
+  partition: 'val'
+  # debug: true

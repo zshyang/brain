@@ -1,0 +1,29 @@
+outf: shrec16/spconv/default
+timelimit: 9999999
+timescale: 1.3
+logger:
+  name: ''
+  overwrite: 1
+manager:
+  ckpt_prefix: ''
+seed: 0
+data:
+  train:
+    dataset:
+      from_basic_blocks: datasets/shrec16_spconv.yaml
+    dataloader:
+      from_basic_blocks: dataloaders/shrec16_spconv.yaml
+  val:
+    dataset:
+      from_basic_blocks: datasets/shrec16_spconv_val.yaml
+    dataloader:
+      from_basic_blocks: dataloaders/shrec16_spconv_val.yaml
+  test: null
+model:
+  from_basic_blocks: models/shrec16_spconv.yaml
+optim:
+  from_basic_blocks: optimizer/adam.yaml
+train:
+  from_basic_blocks: trainer/classification.yaml
+  max_epoch: 300
+  train_freq: 5

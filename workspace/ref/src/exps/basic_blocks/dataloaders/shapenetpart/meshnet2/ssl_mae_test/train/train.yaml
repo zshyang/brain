@@ -1,0 +1,4 @@
+collate_fn: __collate__
+batch_size: 64
+num_workers: 0
+drop_last: 0

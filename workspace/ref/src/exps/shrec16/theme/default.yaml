@@ -1,0 +1,26 @@
+outf: shrec16/theme/default
+timelimit: 14400
+timescale: 1.3
+logger:
+  name: ''
+manager:
+  ckpt_prefix: ''
+seed: 0
+data:
+  train:
+    dataset:
+      from_basic_blocks: datasets/shrec16_theme.yaml
+    dataloader:
+      from_basic_blocks: dataloaders/shrec16_theme.yaml
+  val:
+    dataset:
+      from_basic_blocks: datasets/shrec16_theme_val.yaml
+    dataloader:
+      from_basic_blocks: dataloaders/shrec16_theme_val.yaml
+  test: null
+model:
+  from_basic_blocks: models/shrec16_theme.yaml
+optim:
+  from_basic_blocks: optimizer/adam.yaml
+train:
+  from_basic_blocks: trainer/classification.yaml

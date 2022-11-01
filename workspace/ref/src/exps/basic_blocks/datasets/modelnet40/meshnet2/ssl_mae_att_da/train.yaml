@@ -1,0 +1,6 @@
+lib: Dataset
+name: modelnet40_meshnet2_ssl_rec_att
+params:
+  partition: train
+  rotation_augment: false
+  scale_augment: true

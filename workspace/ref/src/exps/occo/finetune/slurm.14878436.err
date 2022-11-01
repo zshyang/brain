@@ -1,0 +1,98 @@
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+Traceback (most recent call last):
+  File "train.py", line 85, in <module>
+  File "train.py", line 85, in <module>
+  File "train.py", line 85, in <module>
+  File "train.py", line 85, in <module>
+    model_trainer.train(options)        
+    model_trainer.train(options)model_trainer.train(options)  File "/workspace/lib/trainer/trainer.py", line 230, in train
+model_trainer.train(options)
+
+
+  File "/workspace/lib/trainer/trainer.py", line 230, in train
+  File "/workspace/lib/trainer/trainer.py", line 230, in train
+  File "/workspace/lib/trainer/trainer.py", line 230, in train
+        self._report('val')    self._report('val')    
+self._report('val')
+self._report('val')  File "/workspace/lib/trainer/trainer.py", line 176, in _report
+
+  File "/workspace/lib/trainer/trainer.py", line 176, in _report
+
+  File "/workspace/lib/trainer/trainer.py", line 176, in _report
+  File "/workspace/lib/trainer/trainer.py", line 176, in _report
+            self._validate(split)self._validate(split)    self._validate(split)
+
+self._validate(split)
+  File "/workspace/lib/trainer/trainer.py", line 135, in _validate
+  File "/workspace/lib/trainer/trainer.py", line 135, in _validate
+
+      File "/workspace/lib/trainer/trainer.py", line 135, in _validate
+  File "/workspace/lib/trainer/trainer.py", line 135, in _validate
+pred = self.net(**in_data)    
+pred = self.net(**in_data)      File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+    
+pred = self.net(**in_data)pred = self.net(**in_data)      File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+
+
+result = self.forward(*input, **kwargs)  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+      File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/parallel/distributed.py", line 619, in forward
+result = self.forward(*input, **kwargs)        
+    result = self.forward(*input, **kwargs)result = self.forward(*input, **kwargs)  File "/opt/conda/lib/python3.8/site-packages/torch/nn/parallel/distributed.py", line 619, in forward
+output = self.module(*inputs[0], **kwargs[0])
+
+
+      File "/opt/conda/lib/python3.8/site-packages/torch/nn/parallel/distributed.py", line 619, in forward
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/parallel/distributed.py", line 619, in forward
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+output = self.module(*inputs[0], **kwargs[0])
+              File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+output = self.module(*inputs[0], **kwargs[0])output = self.module(*inputs[0], **kwargs[0])result = self.forward(*input, **kwargs)
+    result = self.forward(*input, **kwargs)
+
+
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+  File "/workspace/lib/model/moco.py", line 194, in forward
+  File "/opt/conda/lib/python3.8/site-packages/torch/nn/modules/module.py", line 727, in _call_impl
+  File "/workspace/lib/model/moco.py", line 194, in forward
+        result = self.forward(*input, **kwargs)result = self.forward(*input, **kwargs)
+
+  File "/workspace/lib/model/moco.py", line 194, in forward
+      File "/workspace/lib/model/moco.py", line 194, in forward
+    self._dequeue_and_enqueue(k)    self._dequeue_and_enqueue(k)
+self._dequeue_and_enqueue(k)    
+  File "/opt/conda/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 26, in decorate_context
+
+self._dequeue_and_enqueue(k)  File "/opt/conda/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 26, in decorate_context
+      File "/opt/conda/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 26, in decorate_context
+
+    return func(*args, **kwargs)      File "/opt/conda/lib/python3.8/site-packages/torch/autograd/grad_mode.py", line 26, in decorate_context
+return func(*args, **kwargs)
+return func(*args, **kwargs)    
+  File "/workspace/lib/model/moco.py", line 94, in _dequeue_and_enqueue
+
+return func(*args, **kwargs)  File "/workspace/lib/model/moco.py", line 94, in _dequeue_and_enqueue
+  File "/workspace/lib/model/moco.py", line 94, in _dequeue_and_enqueue
+
+  File "/workspace/lib/model/moco.py", line 94, in _dequeue_and_enqueue
+    assert self.K % batch_size == 0  # for simplicity
+        AssertionErrorassert self.K % batch_size == 0  # for simplicity    assert self.K % batch_size == 0  # for simplicity
+assert self.K % batch_size == 0  # for simplicity
+
+AssertionError
+AssertionError
+
+AssertionError
+Traceback (most recent call last):
+  File "/opt/conda/lib/python3.8/runpy.py", line 194, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/opt/conda/lib/python3.8/runpy.py", line 87, in _run_code
+    exec(code, run_globals)
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py", line 260, in <module>
+    main()
+  File "/opt/conda/lib/python3.8/site-packages/torch/distributed/launch.py", line 255, in main
+    raise subprocess.CalledProcessError(returncode=process.returncode,
+subprocess.CalledProcessError: Command '['/opt/conda/bin/python', '-u', 'train.py', '--local_rank=3', '--options', 'exps/occo/pretrain/moco.yaml']' returned non-zero exit status 1.

@@ -1,0 +1,5 @@
+lib: SHREC16
+name: shrec_spconv
+params:
+  root: '/dataset/shrec16/shrec_16/'
+  split: 'test'

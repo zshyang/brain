@@ -1,0 +1,6 @@
+lib: Dataset
+name: modelnet40_meshnet2
+params:
+  data_root: '/datasets/modelnet/meshnet2/ModelNet40/'
+  partition: 'train'
+  augment: ''

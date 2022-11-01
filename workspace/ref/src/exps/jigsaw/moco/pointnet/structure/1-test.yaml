@@ -1,0 +1,50 @@
+based_on:
+  - 1.yaml
+logger:
+  name: 'test'
+data:
+  train:
+    dataset:
+      name: ModelNetDataset
+      lib: ModelNetDataset
+      params:
+        center: 1
+        rot_da: 0
+        noise_da: 0
+        noise_level: 0.00
+        root: /dataset/modelnet/modelnet40_ply_hdf5_2048/
+        scale: 1
+        split: 'train'
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 3
+      drop_last: 1
+  val:
+    dataset:
+      name: ModelNetDataset
+      lib: ModelNetDataset
+      params:
+        center: 1
+        rot_da: 0
+        noise_da: 0
+        noise_level: 0.00
+        root: /dataset/modelnet/modelnet40_ply_hdf5_2048/
+        scale: 1
+        split: val
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 3
+      drop_last: 0
+  test: null
+model:
+  name: pointnet_jigsaw_moco
+  lib: SimpleNet
+  params:
+    tran0: false
+    tran1: true
+test:
+  name: PCNEncoderTester
+  lib: PCNEncoderTester
+  load_epoch: 77

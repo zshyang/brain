@@ -1,0 +1,9 @@
+/workspace/exps/modelnet40/meshnet2/ssl_mae/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_2/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_3/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_4/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_5/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_6/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_7/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_8/test/r.sh
+/workspace/exps/modelnet40/meshnet2/ssl_mae/0_9/test/r.sh

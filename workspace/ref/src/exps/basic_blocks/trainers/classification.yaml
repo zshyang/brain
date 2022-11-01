@@ -1,0 +1,20 @@
+# mode 0: train from scratch
+# mode 1: train from pre-train
+# mode 2: train from restore
+# mode 3: search and load the latest ckpt
+mode: 3
+params_0: null
+params_1:
+  ckpt_name: spoc.pth
+params_2:
+  load_epoch: 150000
+name: classification
+lib: Trainer
+max_epoch: 10
+loss_params:
+  placeholder: 0
+  mat_diff_loss_scale: 0.001
+scheduler_step: 1
+test_freq: 1
+train_freq: 1
+val_freq: 1

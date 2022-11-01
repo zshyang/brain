@@ -1,0 +1,6 @@
+lib: SHREC11
+name: shrec_meshnet
+params:
+  data_root: '/dataset/shrec16/10-10_A/'
+  partition: 'train'
+  augment: 'rotate'

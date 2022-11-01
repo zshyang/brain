@@ -1,0 +1,14 @@
+lib: MeshNet2
+name: shrec16_meshnet
+params:
+  num_faces: 500
+  num_cls: 30
+  cfg: 
+    num_kernel: 64
+    ConvSurface:
+      num_samples_per_neighbor: 4
+      rs_mode: 'Weighted'
+      num_kernel: 64
+    MeshBlock:
+      blocks: [3, 4, 4]
+  pool_rate: 2

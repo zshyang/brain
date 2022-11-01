@@ -1,0 +1,21 @@
+based_on:
+  - debug.yaml
+outf: multi-view/occo
+data:
+  train:
+    dataset:
+      params:
+        debug: false
+        occo_ratio: 1.0
+    dataloader:
+      num_workers: 2
+  val:
+    dataset:
+      params:
+        debug: false
+        occo_ratio: 1.0
+    dataloader:
+      num_workers: 2
+train:
+  max_epoch: 200
+  train_freq: 50

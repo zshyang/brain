@@ -1,0 +1,14 @@
+based_on: 
+  - default.yaml
+name: 'without_vae'
+outf: 'pnvae_shapenet/without_vae'
+model:
+  params:
+    is_vae: false
+train:
+  load: 0
+  max_epoch: 1000
+  load_epoch: 20
+  loss_params:
+    is_vae: false
+  

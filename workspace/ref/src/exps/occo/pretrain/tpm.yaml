@@ -1,0 +1,52 @@
+outf: occo/pretrain/moco/
+logger:
+  name: 'test'
+manager:
+  ckpt_prefix: ''
+seed: 0
+data:
+  train:
+    dataset:
+      name: ModelNetDataset
+      lib: ModelNetDataset
+      params:
+        center: 1
+        rot_da: 0
+        noise_da: 0
+        noise_level: 0.00
+        root: /dataset/modelnet/modelnet40_ply_hdf5_2048/
+        scale: 1
+        split: 'train'
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 3
+      drop_last: 1
+  val:
+    dataset:
+      name: ModelNetDataset
+      lib: ModelNetDataset
+      params:
+        center: 1
+        rot_da: 0
+        noise_da: 0
+        noise_level: 0.00
+        root: /dataset/modelnet/modelnet40_ply_hdf5_2048/
+        scale: 1
+        split: val
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 3
+      drop_last: 0
+  test: null
+model:
+  name: PCNEncoder
+  params:
+    global_feat: true
+train:
+  # use this flag for generating model logger
+  load: 0
+test:
+  tester: PCNEncoderTester
+  load_epoch: 142

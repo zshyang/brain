@@ -1,0 +1,48 @@
+# pth name prefix
+name: 'pnvae_shapenet'
+# name of the saved logger
+log_name: pnvae_test_modelnet
+# the location to load the model
+outf: 'pnvae_shapenet/default'
+seed: 0
+data:
+  train:
+    dataset:
+      type: 'ModelNetDataset'
+      root: '/dataset'
+      rot_da: 0
+      noise_da: 0
+      noise_level: 0.00
+      split: 'train'
+      center: 1
+      scale: 1
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 0
+      drop_last: 1
+  test:
+    dataset:
+      type: 'ModelNetDataset'
+      root: '/dataset'
+      rot_da: 0
+      noise_da: 0
+      noise_level: 0.00
+      center: 1
+      scale: 1
+      split: 'test'
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 0
+      drop_last: 0
+model:
+  name: PointNetVAE
+  params:
+    is_vae: true
+train:
+  # use this flag for generating model logger
+  load: 0
+test:
+  tester: PointNetVAETester
+  load_epoch: 171

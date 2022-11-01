@@ -1,0 +1,21 @@
+based_on:
+  - debug.yaml
+outf: jigsaw/moco/pointnet/structure/2
+data:
+  train:
+    dataset:
+      params:
+        debug: false
+    dataloader:
+      num_workers: 10
+  val:
+    dataset:
+      params:
+        debug: false
+model:
+  params:
+    tran0: true
+    tran1: false
+train:
+  max_epoch: 200
+  train_freq: 50

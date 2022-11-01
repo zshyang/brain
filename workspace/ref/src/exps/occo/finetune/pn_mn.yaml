@@ -1,0 +1,76 @@
+outf: occo/finetune/pn_mn/
+logger:
+  name: ''
+manager:
+  ckpt_prefix: ''
+seed: 0
+data:
+  train:
+    dataset:
+      name: ModelNetDataset
+      params:
+        center: 1
+        debug: true
+        noise_da: 1
+        noise_level: 0.02
+        root: /dataset/modelnet/modelnet40_ply_hdf5_2048/
+        rot_da: 1
+        scale: 1
+        split: train
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 0
+      drop_last: 1
+  val:
+    dataset:
+      name: ModelNetDataset
+      params:
+        center: 1
+        debug: true
+        noise_da: 0
+        noise_level: 0.00
+        root: /dataset/modelnet/modelnet40_ply_hdf5_2048/
+        rot_da: 0
+        scale: 1
+        split: val
+    dataloader:
+      collate_fn: pointnet_modelnet
+      batch_size: 32
+      num_workers: 0
+      drop_last: 0
+  test: null
+model:
+  name: PointNetCls
+  params:
+    k: 40
+    feature_transform: false
+optim:
+  name: 'Adam'
+  params:
+    lr: 1.0e-3
+    betas: [0.9,0.999]
+    eps: 1.0e-8
+    weight_decay: 1.0e-4
+  scheduler:
+    name: StepLR
+    params:
+      step_size: 20
+      gamma: 0.5
+train:
+  # mode 0: train from scratch
+  # mode 1: train from pre-train
+  # mode 2: train from restore
+  mode: 1
+  params_0: null
+  params_1:
+    ckpt_name: spoc.pth
+  params_2:
+    load_epoch: 60
+  trainer: ModelNetTrainer
+  max_epoch: 20
+  loss_params:
+    label_smoothing: true
+  scheduler_step: 1
+  val_freq: 1
+  test_freq: 1

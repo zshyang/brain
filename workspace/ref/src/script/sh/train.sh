@@ -1,0 +1,1 @@
+python train.py --options exps/min.yaml

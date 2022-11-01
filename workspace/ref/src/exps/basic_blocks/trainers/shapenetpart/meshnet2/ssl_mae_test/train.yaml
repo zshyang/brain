@@ -1,0 +1,19 @@
+# mode 0: train from scratch
+# mode 1: train from pre-train
+# mode 2: train from restore
+# mode 3: search and load the latest ckpt
+mode: 0
+params_0: null
+params_1:
+  ckpt_name: spoc.pth
+params_2:
+  load_epoch: 150000
+name: shapenetpart_meshnet2_ssl_mae_test_train
+lib: Trainer
+max_epoch: 10
+loss_params:
+  placeholder: null
+scheduler_step: 1
+test_freq: 1
+train_freq: 1
+val_freq: 1

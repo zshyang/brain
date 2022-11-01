@@ -1,0 +1,6 @@
+lib: Dataset
+name: modelnet40_meshnet2_ssl_rec_att
+params:
+  # data_root: '/dataset/modelnet/meshnet2/ModelNet40/'
+  partition: 'test'
+  augment: ''

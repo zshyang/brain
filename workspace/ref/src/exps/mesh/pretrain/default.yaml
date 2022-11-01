@@ -1,0 +1,79 @@
+outf: mesh/pretrain/default/
+# 4 hour =  4 * 60 * 60 = 14400
+timelimit: 14400
+timescale: 1.2
+logger:
+  name: ''
+manager:
+  ckpt_prefix: ''
+seed: 0
+data:
+  train:
+    dataset:
+      name: mesh_shapenet
+      lib: ShapeNet642
+      params:
+        split: train
+        mnb: 5000
+    dataloader:
+      collate_fn: meshes_pc
+      batch_size: 4
+      num_workers: 0
+      drop_last: 1
+  val:
+    dataset:
+      name: mesh_shapenet
+      lib: ShapeNet642
+      params:
+        split: val
+        mnb: 5000
+    dataloader:
+      collate_fn: meshes_pc
+      batch_size: 4
+      num_workers: 0
+      drop_last: 0
+  test: null
+model:
+  name: MeshAE
+  lib: MeshAE
+  params:
+    nb: 64
+    msl: 1000
+    hd: 8
+    nh: 4
+    nl: 2
+    ed: 6
+    bd: 128
+optim:
+  name: 'Adam'
+  params:
+    lr: 1.0e-4
+    betas: [0.9,0.999]
+    eps: 1.0e-8
+    # the author mentioned set weight decay to 0 is very 
+    # important for completion task
+    weight_decay: 0.0
+  scheduler:
+    name: StepLR
+    params:
+      step_size: 20
+      gamma: 0.5
+train:
+  # mode 0: train from scratch
+  # mode 1: train from pre-train
+  # mode 2: train from restore
+  # mode 3: search and load the latest ckpt
+  mode: 2
+  params_0: null
+  params_1:
+    ckpt_name: spoc.pth
+  params_2:
+    load_epoch: 0
+  trainer: MeshAETrainer
+  max_epoch: 50
+  loss_params:
+    placeholder: 0
+  scheduler_step: 1
+  test_freq: 1
+  train_freq: 1
+  val_freq: 1

@@ -1,0 +1,19 @@
+lib: Network
+name: modelnet40_meshnet2_ssl_mae
+params:
+  en_config:
+    num_faces: 1024
+    num_cls: 40
+    cfg: 
+      num_kernel: 64
+      ConvSurface:
+        num_samples_per_neighbor: 4
+        rs_mode: 'Weighted'
+        num_kernel: 64
+      MeshBlock:
+        blocks: [3, 4, 4]
+    pool_rate: 4
+    mask_percentage: 0.1
+    op_method: attention
+  de_config:
+    bneck_size: 1024

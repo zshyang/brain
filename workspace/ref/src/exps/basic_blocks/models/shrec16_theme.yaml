@@ -1,0 +1,17 @@
+lib: Network
+name: shrec16_theme
+params:
+  bte_kwargs:
+    msl: 300
+    hd: 256
+    nh: 8
+    nl: 4
+    ed: 256
+  unet_kwargs: 
+    in_channels: 256
+    out_channels: 16
+    nb: 16
+  mlp_kwargs:
+    in_channels: 16
+    out_channels: 30
+    hidden: 128

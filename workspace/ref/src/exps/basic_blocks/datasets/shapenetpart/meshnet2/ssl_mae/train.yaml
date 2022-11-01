@@ -1,0 +1,4 @@
+lib: Dataset
+name: shapenetpart_meshnet2_ssl_mae
+params:
+  placeholder: null
