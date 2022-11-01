@@ -5,4 +5,4 @@ workspace/simplified/
 runtime/
 workspace/sample_point
 *.pyc
-workspace/ref
+workspace/ref/
