@@ -7,10 +7,20 @@ logs:
     20221101    file created
 '''
 import torch
-
+import argparse
+from options import update_options
 
 def parse_args():
-    pass
+    parser = argparse.ArgumentParser()
+
+    str_help = 'experiment options file name'
+    parser.add_argument('--options',
+        help=str_help, required=True, type=str
+    )
+
+    args = parser.parse_args()
+
+    update_options(args.options)
 
 
 def test():
