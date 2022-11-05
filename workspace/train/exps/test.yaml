@@ -11,9 +11,8 @@ data:
   train:
     dataset:
       params:
-        debug: false
+        debug: true
         placeholder: null
-      # from_basic_blocks: datasets/shapenetpart/meshnet2/ssl_mae/train.yaml
     dataloader:
       collate_fn: __collate__
       batch_size: 4
