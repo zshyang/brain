@@ -44,3 +44,6 @@ There are totally 841 mesh files.
 Next step is to make the simplified mesh file into npy files.
 
 still need to remove redundent lines in each file.
+
+
+in folder `train`, by running train.sh and test.sh we could get the un-supervised learning results.
