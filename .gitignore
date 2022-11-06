@@ -6,3 +6,5 @@ runtime/
 workspace/sample_point
 *.pyc
 workspace/ref/
+workspace/data/
+workspace/data.zip

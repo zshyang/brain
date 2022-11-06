@@ -11,7 +11,7 @@ data:
   train:
     dataset:
       params:
-        debug: true
+        debug: false
         placeholder: null
     dataloader:
       collate_fn: __collate__
