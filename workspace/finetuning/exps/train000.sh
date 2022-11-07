@@ -1,5 +1,5 @@
-DEBUG=false
-EXP_NAME="train"
+DEBUG=true
+EXP_NAME="finetuning"
 
 cd /workspace/$EXP_NAME
 

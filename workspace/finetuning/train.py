@@ -48,21 +48,52 @@ def load_net_from_pre_trained(net, ckpt_path):
     return net
 
 
+def create_label_dict():
+    return {
+        'AD_pos': 0,
+        'MCI_neg': 1,
+        'MCI_pos': 2,
+        'NL_neg': 3,
+        'NL_pos': 4
+    }
+
+
+def load_dataloader(opt):
+    dataset = Dataset(**opt.dataset.params)
+    collate_fn = getattr(
+        dataset, str(opt.dataloader.collate_fn), None
+    )
+    dataloader = torch.utils.data.DataLoader(
+        dataset, 
+        collate_fn=collate_fn,
+        batch_size=opt.dataloader.batch_size,
+        drop_last=bool(opt.dataloader.drop_last),
+        num_workers=int(opt.dataloader.num_workers)
+    )
+    return dataloader
+
+
+def finetune():
+    pass
+
+
 if __name__ == '__main__':
     parse_args()
 
     _fix_random(options.seed)
 
+    #======== dataloader ========
     train_op = options.data.train
-    train_dataset = Dataset(**train_op.dataset.params)
-    collate_fn = getattr(
-        train_dataset, str(train_op.dataloader.collate_fn), None
-    )
-    train_dataloader = torch.utils.data.DataLoader(
-        train_dataset, 
-        collate_fn=collate_fn,
-        batch_size=train_op.dataloader.batch_size,
-        drop_last=bool(train_op.dataloader.drop_last),
-        num_workers=int(train_op.dataloader.num_workers)
-    )
+    train_dataloader = load_dataloader(train_op)
 
+    val_op = options.data.val
+    val_dataloader = load_dataloader(val_op)
+
+    test_op = options.data.test
+    test_dataloader = load_dataloader(test_op)
+
+    #======== net, optimizer, scheduler ========
+    net = Network(**options.model.params).cuda()
+
+    #======== finetune ========
+    finetune()

@@ -11,18 +11,43 @@ data:
   train:
     dataset:
       params:
-        debug: false
-        placeholder: null
+        fold_group: 0
+        two_class: 
+          - AD_pos
+          - NL_neg
+        type: train
     dataloader:
       collate_fn: __collate__
       batch_size: 4
       num_workers: 4
       drop_last: 0
-  val: null
-  test: null
+  val:
+    dataset:
+      params:
+        fold_group: 0
+        two_class: 
+          - AD_pos
+          - NL_neg
+        type: val
+    dataloader:
+      collate_fn: __collate__
+      batch_size: 4
+      num_workers: 4
+      drop_last: 0
+  test:
+    dataset:
+      params:
+        fold_group: 0
+        two_class: 
+          - AD_pos
+          - NL_neg
+        type: test
+    dataloader:
+      collate_fn: __collate__
+      batch_size: 4
+      num_workers: 4
+      drop_last: 0
 model:
-  lib: Network
-  name: modelnet40_meshnet2_ssl_mae
   params:
     en_config:
       num_faces: 8192
