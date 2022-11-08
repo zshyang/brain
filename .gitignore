@@ -2,7 +2,7 @@ workspace/MMS/
 workspace/obj/
 workspace/manifold/
 workspace/simplified/
-runtime/
+runtime/*.pt
 workspace/sample_point
 *.pyc
 workspace/ref/
