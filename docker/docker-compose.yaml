@@ -9,7 +9,7 @@ services:
         reservations:
           devices:
             - driver: nvidia
-              device_ids: ['0']
+              device_ids: ['0,1,2,3']
               capabilities: [gpu]
     image: dadadadockerer/brain:0.1
     ports:
@@ -20,3 +20,4 @@ services:
     volumes:
       - ../workspace/:/workspace/
       - ../runtime/:/runtime/
+    ipc: "host"

@@ -57,7 +57,7 @@ class Dataset(data.Dataset):
         print('finish load', len(self.mesh_data_dict), 'meshes')
 
     def __len__(self):
-        return len(self.list_label)
+        return len(self.list_mesh_index)
 
     def __getitem__(self, i):
         # Read mesh properties for .npz files
@@ -88,7 +88,7 @@ class Dataset(data.Dataset):
             'ring_2': ring_2,
             'ring_3': ring_3,
             'mesh_index': mesh_index,
-            'lable': label,
+            'label': label,
         }
         return collated_dict
 
@@ -160,8 +160,10 @@ class Dataset(data.Dataset):
         ring_1 = Variable(ring_1)
         ring_2 = Variable(ring_2)
         ring_3 = Variable(ring_3)
-        
-        label = torch.stack(collated_dict['label'])
+
+        label = torch.from_numpy(
+            np.array(collated_dict['label'], dtype=np.int)
+        )
 
         return {
             'verts': verts,

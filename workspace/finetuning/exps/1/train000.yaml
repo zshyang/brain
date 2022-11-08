@@ -1,4 +1,4 @@
-outf: null
+outf: 'finetune/train_1_000'
 timelimit: -1
 timescale: 1.3
 logger:
@@ -7,46 +7,50 @@ logger:
 manager:
   ckpt_prefix: ''
 seed: 0
+debug: false
 data:
   train:
     dataset:
       params:
         fold_group: 0
         two_class: 
-          - AD_pos
-          - NL_neg
+          - MCI_pos
+          - MCI_neg
         type: train
     dataloader:
       collate_fn: __collate__
       batch_size: 4
       num_workers: 4
+      shuffle: true
       drop_last: 0
   val:
     dataset:
       params:
         fold_group: 0
         two_class: 
-          - AD_pos
-          - NL_neg
+          - MCI_pos
+          - MCI_neg
         type: val
     dataloader:
       collate_fn: __collate__
       batch_size: 4
       num_workers: 4
       drop_last: 0
+      shuffle: true
   test:
     dataset:
       params:
         fold_group: 0
         two_class: 
-          - AD_pos
-          - NL_neg
+          - MCI_pos
+          - MCI_neg
         type: test
     dataloader:
       collate_fn: __collate__
       batch_size: 4
       num_workers: 4
       drop_last: 0
+      shuffle: true
 model:
   params:
     en_config:
@@ -63,7 +67,9 @@ model:
       pool_rate: 4
       mask_percentage: 0.3
     de_config:
+      in_channel: 1024
       bneck_size: 1024
+      num_cls: 2
 optim:
   name: 'Adam'
   params:
@@ -77,6 +83,6 @@ optim:
       milestones: [30, 60]
       gamma: 0.5
 train:
-  max_epoch: 300
+  max_epoch: 50
   train_freq: 5
   save_at_train: true

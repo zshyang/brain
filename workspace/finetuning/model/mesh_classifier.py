@@ -19,6 +19,8 @@ class Network(nn.Module):
 
         self.encoder = NetworkBeforeLinear(**en_config)
 
+        in_channel = de_config['in_channel']
+        num_cls = de_config['num_cls']
         self.classifier = nn.Sequential(
             nn.Linear(in_channel, 512),
             nn.BatchNorm1d(512),
@@ -36,5 +38,5 @@ class Network(nn.Module):
         normals, ring_1, ring_2, ring_3, **kwargs
     ):
         fea = self.encoder(verts, faces, centers, normals, ring_1, ring_2, ring_3)
-        y = self.decoder(fea)
+        y = self.classifier(fea)
         return y, fea

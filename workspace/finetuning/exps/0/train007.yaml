@@ -1,0 +1,16 @@
+based_on:
+  - train000.yaml
+outf: 'finetune/train_0_007'
+data:
+  train:
+    dataset:
+      params:
+        fold_group: 7
+  val:
+    dataset:
+      params:
+        fold_group: 7
+  test:
+    dataset:
+      params:
+        fold_group: 7
