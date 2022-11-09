@@ -1,0 +1,8 @@
+update: {'val_acc': 0.4444444444444444, 'val_ep': 0} {'test_acc': 0.5714285714285714}
+update: {'val_acc': 0.48148148148148145, 'val_ep': 1} {'test_acc': 0.5714285714285714}
+update: {'val_acc': 0.5, 'val_ep': 2} {'test_acc': 0.6571428571428571}
+update: {'val_acc': 0.5, 'val_ep': 3} {'test_acc': 0.6571428571428571}
+update: {'val_acc': 0.5925925925925926, 'val_ep': 6} {'test_acc': 0.6571428571428571}
+update: {'val_acc': 0.5925925925925926, 'val_ep': 11} {'test_acc': 0.6571428571428571}
+update: {'val_acc': 0.5925925925925926, 'val_ep': 48} {'test_acc': 0.6571428571428571}
+{'test_acc': 0.6571428571428571}
