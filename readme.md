@@ -20,68 +20,98 @@ docker-compose up -d brain
 
 ## Data Processing
 
-Download the folder from [here](). Unzip the data folder under `workspace`. You would see `.m` in the folder named `MMS`
+Download the folder from [here](). Unzip the data folder under `workspace`. You would see `.m` in the folder named `MMS`. There are totally 841 mesh files.
 
-### 1. Process the m files into obj file 
+### 1. Process the m files into obj file
 
 There are 2 options:
 
-#### (a) Download the proccessed files
+#### (a) Download the proccessed files.
 
-Download the folder from [here](). Unzip the data folder under `workspace`. You would a folder named `ojb`
+Download the folder from [here](). Unzip the data folder under `workspace`. You would a folder named `obj`.
 
-#### (b) Process the files locally
+#### (b) Process the files locally.
+
+Enter the docker image and process the files. `$` means the command running on local machine. `#` means the command running in the docker container.
 
 ```
-python -m debugpy --listen 0.0.0.0:5566 --wait-for-client generate_obj.py
+$ docker exec -it brain bash
+# cd /workspace/data_processing
+# python generate_obj.py
+---- run the following line if you want to debug in VSCode ----
+# python -m debugpy --listen 0.0.0.0:5566 --wait-for-client generate_obj.py
 ```
 
-
-the next step is to process obj files into npy file for MGMA.
-
-The try to train the network. 
-
-generate the docker image with the following command line:
-```bash
-docker-compose build brain
-```
-
-Next step is to generate data with obj format and visuliza some of them.
-
-make the image up online
-```bash
-docker-compose up -d brain
-```
-enter the container
-```bash
-docker exec -it brain bash
-```
-
-debug inside of a docker container
-```
-python -m debugpy --listen 0.0.0.0:5566 --wait-for-client generate_obj.py
-```
-
-make the generate folder belong to my group
-```bash
-george@La:~/Projects/brain/workspace$ sudo chown -R george:george obj
-```
-
-There is a problem with the mesh. the mesh is not watertight.
+There is a problem with the mesh. the mesh is not watertight. Thus we need the next step.
 ![over all figure](fig/whole.png)
 ![detail figure](fig/crack.png)
 
+#### 2. Make the files watertight
+You could download the files from [here]() or run the follow commmand.
+```
+# python manifold.py
+```
 
-copy the manifold to excute the manifold and simplification.
+#### 3. Simplify the watertight meshes
+You could download the files from [here]() or run the follow commmand.
+```
+# python simplify.py
+```
 
-There are totally 841 mesh files.
+#### 4. Process obj files into npy file as graph
+You could download the files from [here]() or run the follow commmand.
+```
+# python generate_npy.py
+```
 
-Next step is to make the simplified mesh file into npy files.
+#### 5. Sample point clouds from obj files
+You could download the files from [here]() or run the follow commmand.
+```
+# python sample_point.py
+```
 
-still need to remove redundent lines in each file.
+## Training the network 
 
+### Pre-training
 
-in folder `train`, by running train.sh and test.sh we could get the un-supervised learning results.
+```
+# ./workspace/train/exps/train.sh
+```
+The ckpt will be generated in folder `runtime`
+
+### Test with SVM
+
+Modify the path of the ckpt in file `single_gpu_test.py` to change the loaded model.
+```
+# ./workspace/train/exps/test.sh
+```
+
+### Fine-tuning
+
+Fine-tune the network for compare group 1.
+```
+# ../workspace/finetuning/train_0.sh
+```
+Fine-tune for group 2 and 3. Change the device name if needed.
+```
+# ./workspace/finetuning/train_1_GPU_0.sh
+# ./workspace/finetuning/train_1_GPU_1.sh
+# ./workspace/finetuning/train_2_GPU_2.sh
+# ./workspace/finetuning/train_2_GPU_3.sh
+```
+
+## Issues
+
+### simplifiy and manifold software
+
+Refre to this [repo](https://github.com/hjwdzh/Manifold). You might need to replace file `manifold` and `simplify` in folder `workspace/data_processing/manifold` with your own complied files.
+
+### change the group of generate data files\
+make the generate folder belong to my group
+
+```bash
+$ sudo chown -R {root_user}:{id_user} obj
+```
 
 ## Citation
 
