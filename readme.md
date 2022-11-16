@@ -4,7 +4,7 @@
 **Pre-Training Graph Attention Convolution for Brain Structural Imaging Biomarker Analysis and Its Application to Alzheimer's Disease Pathology Identification**
 
 
-[Zhangsihao Yang](https://scholar.google.com/citations?user=VaRp0cMAAAAJ&hl=en), Yi Su, [Mohammad Farazi](https://scholar.google.com/citations?hl=en&user=lHa5pY4AAAAJ), Wenhui Zhu$^1$, Yanxi Chen$^1$, [Eric M Reiman](https://scholar.google.com/citations?user=I-Khl7AAAAAJ), Richard J Caselli, [Kewei Chen](https://scholar.google.com/citations?user=d83ZIzEAAAAJ&hl=zh-CN), [Yalin Wang](https://gsl.lab.asu.edu/), [Natasha Lepore](https://keck.usc.edu/faculty-search/natasha-lepore/)
+[Zhangsihao Yang](https://scholar.google.com/citations?user=VaRp0cMAAAAJ&hl=en), Yi Su, [Mohammad Farazi](https://scholar.google.com/citations?hl=en&user=lHa5pY4AAAAJ), Wenhui Zhu, Yanxi Chen, [Eric M Reiman](https://scholar.google.com/citations?user=I-Khl7AAAAAJ), Richard J Caselli, [Kewei Chen](https://scholar.google.com/citations?user=d83ZIzEAAAAJ&hl=zh-CN), [Yalin Wang](https://gsl.lab.asu.edu/), [Natasha Lepore](https://keck.usc.edu/faculty-search/natasha-lepore/)
 
 **[Paper](paper/ISBI2023_UnsupervisedLearning.pdf)**
 
