@@ -8,3 +8,4 @@ workspace/sample_point
 workspace/ref/
 workspace/data/
 workspace/data.zip
+workspace/*.zip
