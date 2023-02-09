@@ -9,3 +9,4 @@ workspace/ref/
 workspace/data/
 workspace/data.zip
 workspace/*.zip
+data/*
