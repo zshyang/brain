@@ -9,4 +9,8 @@ workspace/ref/
 workspace/data/
 workspace/data.zip
 workspace/*.zip
-data/*
+data/all
+data/MMS
+data/Yalin-20221214T130833Z-001
+data/Yalin-20221214T130833Z-001.zip
+data/MMS.zip
