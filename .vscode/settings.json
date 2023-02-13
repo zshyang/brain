@@ -1,4 +1,10 @@
 {
-    "editor.rulers": [40],
+    "editor.rulers": [
+        79
+    ],
     "editor.mouseWheelZoom": true,
+    "editor.formatOnSave": true,
+    "editor.codeActionsOnSave": [
+        "source.organizeImports",
+    ],
 }
