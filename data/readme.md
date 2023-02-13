@@ -23,3 +23,7 @@ This folder is shared by professor Wang on Slack. And it is process by
 another group.
 
 They are from child dataset.
+
+# Merge All the Dataset Together
+
+more details please see [another folder](../workspace/data_processing/merge_dataset/readme.md)
