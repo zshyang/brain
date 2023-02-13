@@ -18,6 +18,5 @@ services:
     stdin_open: true
     tty: true
     volumes:
-      - ../workspace/:/workspace/
-      - ../runtime/:/runtime/
+      - ../:/workspace/
     ipc: "host"
