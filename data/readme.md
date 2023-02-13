@@ -1,12 +1,25 @@
-MMS.zip
+# MMS.zip
+
 is downloaded from https://drive.google.com/file/d/1f0T4OKhxGtIb4hbZEhB4vqTiKxETkuNJ/view
 
-MMS is unzipped from MMS.zip
+They are the data I used from ADNI. 
 
-all folder is downloaded from 
-/home/hohokam/Alumni/JFWu/AmyloidBeta_Frontier_data/OASIS/final_mesh/all
+### MMS
 
+is unzipped from MMS.zip
 
-vent_out.zip is downloaded from 
+# all 
+folder is downloaded from 
+`/home/hohokam/Alumni/JFWu/AmyloidBeta_Frontier_data/OASIS/final_mesh/all`
+
+These are OASIS dataset.
+
+# vent_out.zip 
+
+is downloaded from 
 https://drive.google.com/drive/folders/1lS2HiC8EWLpT3SYZPFP5oyVgogLNx54o?usp=sharing
-open the link and vent_out.zip is downloaded from there.
+
+This folder is shared by professor Wang on Slack. And it is process by 
+another group.
+
+They are from child dataset.
