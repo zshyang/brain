@@ -67,6 +67,14 @@ def main():
         save_obj('validate.obj', verts, faces)
         break
 
+    # verify the vent_out folder is correct.
+    vent_out_folder_path = glob('/workspace/data/vent_out/*.m')
+    # save the m file into obj file.
+    for m_file_path in vent_out_folder_path:
+        verts, faces = load_m_file(m_file_path)
+        save_obj('validate_vent.obj', verts, faces)
+        break
+
     return 0
 
 
