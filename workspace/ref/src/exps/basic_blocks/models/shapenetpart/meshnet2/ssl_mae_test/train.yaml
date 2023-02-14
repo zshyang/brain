@@ -1,5 +1,0 @@
-lib: Network
-name: shapenetpart_meshnet2_ssl_mae_test_train
-params:
-  placeholder: null
-  structure_scale: 1.0

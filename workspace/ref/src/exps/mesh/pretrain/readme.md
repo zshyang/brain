@@ -1,5 +1,0 @@
-```
-.
-|-- debug.yaml
-`-- default.yaml
-```

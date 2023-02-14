@@ -1,6 +1,0 @@
-seed: 777
-train:
-  max_steps: 100000
-  val_freq: 1000
-  load: 0
-  load_iter: 4

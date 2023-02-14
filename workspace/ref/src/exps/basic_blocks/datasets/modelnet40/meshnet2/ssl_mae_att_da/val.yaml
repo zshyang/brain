@@ -1,6 +1,0 @@
-lib: Dataset
-name: modelnet40_meshnet2_ssl_rec_att
-params:
-  partition: test
-  rotation_augment: false
-  scale_augment: false

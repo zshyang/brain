@@ -1,4 +1,0 @@
-lib: Network
-name: shrec16_spconv_trans
-params:
-  dump: None
