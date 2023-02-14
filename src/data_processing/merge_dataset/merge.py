@@ -36,7 +36,9 @@ def parse_all_path(file_path):
 
 
 def main():
-    save_folder_path = '/workspace/data/merged_dataset/raw'
+    global_count = 0
+
+    save_folder_path = '/workspace/data/merged/raw'
     all_file_paths = glob('/workspace/data/all/*/*.m')
     for all_file_path in all_file_paths:
         parse_all_path(all_file_path)
