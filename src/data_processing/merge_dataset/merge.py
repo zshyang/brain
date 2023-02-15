@@ -6,9 +6,10 @@ author:
 logs:
     2023-02-13: init
 '''
+import argparse
 import os
 from glob import glob
-import argparse
+
 from mfile_loader import MFileLoader
 
 
@@ -40,9 +41,8 @@ def process(args):
     save_folder_path = '/workspace/data/merged/raw'
 
     # create the list of files
-    file_paths = glob('/workspace/data/all/*/*.m') + glob('/workspace/data/MMS/*/*/*.m')
-
-    
+    file_paths = glob('/workspace/data/all/*/*.m') + \
+        glob('/workspace/data/MMS/*/*/*.m')
 
     file_path = file_paths[args.index]
 
@@ -50,12 +50,10 @@ def process(args):
         results = parse_all_path(file_path)
         save_results(results, save_folder_path, args.index)
     elif file_path.split('/')[3] == 'MMS':
-        parse_mms_path(file_path)
+        results = parse_mms_path(file_path)
         save_results(results, save_folder_path, args.index)
     else:
         print('error')
-
-    
 
 
 if __name__ == '__main__':
