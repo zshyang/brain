@@ -34,7 +34,7 @@ class MFileLoader:
             face = parse('Face {} {:d} {:d} {:d}{}', line)
             faces.append([face[1], face[2], face[3]])
         return faces
-    
+
     def __parse_jfeature(self, line, jfeatures):
         '''parse the jfeature line
         '''
@@ -43,3 +43,18 @@ class MFileLoader:
             jfeature = parse("{Jfeature=({} {} {} {} {} {} {})}\n", vert[4])
             jfeatures.append([jfeature[0], jfeature[1], jfeature[2], jfeature[3], jfeature[4], jfeature[5], jfeature[6]])
         return jfeatures
+
+    def get_vertices(self):
+        '''get the vertices
+        '''
+        return self.verts
+
+    def get_faces(self):
+        '''get the faces
+        '''
+        return self.faces
+
+    def get_jfeatures(self):
+        '''get the jfeatures
+        '''
+        return self.jfeatures

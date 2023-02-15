@@ -8,7 +8,7 @@ logs:
 '''
 import os
 from glob import glob
-
+import argparse
 from mfile_loader import MFileLoader
 
 
@@ -16,36 +16,55 @@ def parse_all_path(file_path):
     '''parse the file path
     '''
     loaded_mfile = MFileLoader(file_path)
-    print(loaded_mfile)
+
+    # split the file path
     split_file_path = file_path.split('/')
-    print(file_path)
+
     dataset_type = 'OASIS'
     side_info = split_file_path[-2]
     stage = ''
     ori_id = split_file_path[-1].split('.')[0]
-    print(ori_id)
 
-    file_name = file_path[-1]
-    file_name = file_name.split('.')[0]
-    file_name = file_name.split('_')
-    file_name = file_name[0] + '_' + file_name[1] + '_' + file_name[2]
-    file_name = file_name + '.obj'
-    file_path = '/'.join(file_path[:-1])
-    file_path = file_path + '/' + file_name
-    return file_path
+    return loaded_mfile, dataset_type, side_info, stage, ori_id
 
 
-def main():
-    global_count = 0
+def parse_mms_path(file_path):
+    pass
 
+
+def save_results(results, save_folder_path, index):
+    pass
+
+
+def process(args):
     save_folder_path = '/workspace/data/merged/raw'
-    all_file_paths = glob('/workspace/data/all/*/*.m')
-    for all_file_path in all_file_paths:
-        parse_all_path(all_file_path)
-        break
 
-    adni_folder_path = glob('/workspace/data/MMS/*/*/*.m')
+    # create the list of files
+    file_paths = glob('/workspace/data/all/*/*.m') + glob('/workspace/data/MMS/*/*/*.m')
+
+    
+
+    file_path = file_paths[args.index]
+
+    if file_path.split('/')[3] == 'all':
+        results = parse_all_path(file_path)
+        save_results(results, save_folder_path, args.index)
+    elif file_path.split('/')[3] == 'MMS':
+        parse_mms_path(file_path)
+        save_results(results, save_folder_path, args.index)
+    else:
+        print('error')
+
+    
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description='merge dataset')
+
+    parser.add_argument(
+        '--index', type=int, default='0', help='the index in the list'
+    )
+
+    args = parser.parse_args()
+
+    process(args)
