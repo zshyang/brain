@@ -1,10 +1,17 @@
 {
-    "editor.rulers": [
-        79
-    ],
-    "editor.mouseWheelZoom": true,
-    "editor.formatOnSave": true,
-    "editor.codeActionsOnSave": [
-        "source.organizeImports",
-    ],
+  "editor.rulers": [79],
+  "editor.mouseWheelZoom": true,
+  "editor.formatOnSave": true,
+  "python.formatting.provider": "autopep8",
+  "editor.codeActionsOnSave": ["source.organizeImports"],
+  "python.analysis.typeCheckingMode": "basic",
+  "editor.formatOnSaveMode": "file",
+  "[javascript, python]": {
+    "editor.formatOnSave": true
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[python]": {
+    "editor.defaultFormatter": "ms-python.autopep8",
+    "editor.formatOnSave": true
+  }
 }
