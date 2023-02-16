@@ -13,10 +13,13 @@ class MFileLoader:
         faces = []
         jfeatures = []
         with open(self.file_path, 'r') as file:
-            for line in file:
-                verts = self.__parse_vertex(line, verts)
-                faces = self.__parse_face(line, faces)
-                jfeatures = self.__parse_jfeature(line, jfeatures)
+            try:
+                for line in file:
+                    verts = self.__parse_vertex(line, verts)
+                    faces = self.__parse_face(line, faces)
+                    jfeatures = self.__parse_jfeature(line, jfeatures)
+            except UnicodeDecodeError:
+                assert len(verts) == len(jfeatures) == 15000, 'at least we need verts'
         return verts, faces, jfeatures
 
     def __parse_vertex(self, line, verts):

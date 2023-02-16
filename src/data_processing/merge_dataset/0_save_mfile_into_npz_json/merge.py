@@ -100,6 +100,14 @@ def process(args):
         save_results(results, save_folder_path, args.index)
     else:
         print('error')
+        return None
+
+
+    # just save the face
+    if not os.path.exists('/workspace/data/merged/face.npy'):
+        face = results[0].get_faces()
+        face = np.array(face, dtype=np.int32)
+        np.save('/workspace/data/merged/face.npy', face)
 
 
 if __name__ == '__main__':
