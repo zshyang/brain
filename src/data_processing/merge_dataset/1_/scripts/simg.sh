@@ -4,9 +4,6 @@ INDEX=$2
 SIMG_DIR=/workspace/src/data_processing/merge_dataset/1_/
 SIMG_SCRIPTS_DIR=$SIMG_DIR"scripts/"
 
-echo $SIMG_SCRIPTS_DIR
-echo $SIMG_DIR
-
 if [ "$DEBUG" = "debug" ]; then
     echo "Debug mode"
 else

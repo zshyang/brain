@@ -4,15 +4,13 @@ PYTHON_DIR=$3
 
 cd $PYTHON_DIR
 
-
 if [ "$DEBUG" = "debug" ]; then
     python \
     -m debugpy --listen 0.0.0.0:5566 --wait-for-client \
-    ./merge.py \
-    --index $index
+    ./main.py \
+    --index $INDEX
 else
     python \
-    ./merge.py \
+    ./main.py \
     --index $INDEX
 fi
-
