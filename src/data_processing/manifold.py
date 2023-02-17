@@ -5,6 +5,7 @@ from tqdm import tqdm
 
 WT_PATH = 'manifold/manifold'
 
+
 def get_manifold_path(obj_file):
     split_path = obj_file.split('/')
     split_path[1] = 'manifold'
@@ -19,7 +20,7 @@ def generate_manifold_file(obj_file, manifold_path):
     make_file_folder(manifold_path)
     cmd = f'{WT_PATH} {obj_file} {manifold_path}'
     os.system(cmd)
-    
+
 
 def main():
     list_obj_file = glob('../obj/*/l/*.obj')
