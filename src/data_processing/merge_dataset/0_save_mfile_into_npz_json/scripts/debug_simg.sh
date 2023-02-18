@@ -1,7 +1,7 @@
 singularity exec --nv --no-home \
 --bind /scratch/zyang195/projects/brain/:/workspace/ \
 /scratch/zyang195/singularity/pytorch-1-12-1.simg \
-/workspace/src/data_processing/merge_dataset/scripts/debug_python.sh 455
+/workspace/src/data_processing/merge_dataset/0_save_mfile_into_npz_json/scripts/debug_python.sh 455
 
 
 # file 31 does not exist
