@@ -102,7 +102,6 @@ def process(args):
         print('error')
         return None
 
-
     # just save the face
     if not os.path.exists('/workspace/data/merged/face.npy'):
         face = results[0].get_faces()
