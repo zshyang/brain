@@ -11,6 +11,7 @@ import os
 from glob import glob
 
 import numpy as np
+from scipy.spatial import cKDTree
 
 
 def make_file_folder(file_path):
@@ -26,31 +27,93 @@ def write_obj_file(obj_file, verts, faces):
             file.write("f {} {} {}\n".format(face[0], face[1], face[2]))
 
 
-SIMPLIFY_PATH = 'manifold/simplify'
-TARGET_FACE_NUM = 2048 * 4
+def parse_vertex(line, verts):
+    if line[0] == 'v':
+        verts.append([float(x) for x in line.split()[1:]])
 
 
-def get_path(obj_file):
-    split_path = obj_file.split('/')
-    split_path[1] = 'simplified'
-    return '/'.join(split_path)
+def parse_face(line, faces):
+    if line[0] == 'f':
+        faces.append([int(x.split('/')[0]) for x in line.split()[1:]])
 
 
-def make_file_folder(file_path):
-    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+def load_obj_file(obj_file):
+    verts = []
+    faces = []
+    with open(obj_file, "r") as file:
+        for line in file:
+            parse_vertex(line, verts)
+            parse_face(line, faces)
+    return np.array(verts), np.array(faces)
 
 
-def generate_file(obj_file, simplified_mesh_path):
-    make_file_folder(simplified_mesh_path)
-    cmd = f'{SIMPLIFY_PATH} -i {obj_file} -o {simplified_mesh_path} -m -f {TARGET_FACE_NUM}'
-    os.system(cmd)
+def compute_closest_faces(orig_vertices, remeshed_vertices, orig_faces):
+    ''' compute the closest faces for each remeshed vertex
+
+    Args:
+        orig_vertices (np.ndarray): the vertices of the original mesh
+        remeshed_vertices (np.ndarray): the vertices of the remeshed mesh
+        orig_faces (np.ndarray): the faces of the original mesh
+    '''
+    face_centers = orig_vertices[orig_faces - 1].mean(-2)
+
+    orig_kdtree = cKDTree(face_centers)
+
+    closest_faces = np.zeros(len(remeshed_vertices), dtype=int)
+    for i, vertex in enumerate(remeshed_vertices):
+        _, orig_vertex_idx = orig_kdtree.query(vertex)
+        closest_faces[i] = orig_vertex_idx
+
+    return closest_faces
 
 
-def main():
-    list_obj_file = glob('../manifold/*/l/*.obj')
-    for obj_file in tqdm(list_obj_file):
-        path = get_path(obj_file)
-        generate_file(obj_file, path)
+def project_point_onto_plane(remeshed_verts, vertices, faces, closest_faces):
+    faces = faces - 1
+    # compute the normal of each face
+    face_normals = np.cross(vertices[faces[:, 1]] - vertices[faces[:, 0]],
+                            vertices[faces[:, 2]] - vertices[faces[:, 0]])
+    face_normals = face_normals / \
+        np.linalg.norm(face_normals, axis=1, keepdims=True)
+
+    # get the normal for the closest face
+    selected_face_normals = face_normals[closest_faces]
+    # get the first point on the selected face
+    selected_face_q_vertices = vertices[faces[closest_faces][:, 0]]
+    # compute the vector from the remeshed vertices to the selected face
+    remeshed_to_q = remeshed_verts - selected_face_q_vertices
+    # compute the distance of the remeshed vertices to the selected face
+    dist = np.sum(remeshed_to_q * selected_face_normals, axis=1)
+    # project the remeshed vertices onto the selected face
+    projected_verts = remeshed_verts - \
+        dist[:, np.newaxis] * selected_face_normals
+    return projected_verts
+
+
+def compute_barycentric_coords(projected_verts, closest_faces, vertices, faces):
+    faces = faces - 1
+
+    A = vertices[faces[closest_faces][:, 0]]
+    B = vertices[faces[closest_faces][:, 1]]
+    C = vertices[faces[closest_faces][:, 2]]
+
+    P = projected_verts
+
+    v1 = B - A
+    v2 = C - A
+    v3 = P - A
+
+    dot11 = (v1 * v1).sum(axis=1)
+    dot12 = (v1 * v2).sum(axis=1)
+    dot22 = (v2 * v2).sum(axis=1)
+    dot31 = (v3 * v1).sum(axis=1)
+    dot32 = (v3 * v2).sum(axis=1)
+
+    invDenom = 1 / (dot11 * dot22 - dot12 * dot12)
+    u = (dot22 * dot31 - dot12 * dot32) * invDenom
+    v = (dot11 * dot32 - dot12 * dot31) * invDenom
+    w = 1.0 - u - v
+
+    return np.array([u, v, w]).T
 
 
 def main(args):
@@ -91,12 +154,24 @@ def main(args):
 
     # ==== resample the Jfeature ==== #
     # load the Jfeature
-    jfeatures = 
+    jfeatures = npz_data['jfeature']
     # load the remeshed mesh
+    remeshed_verts, remeshed_faces = load_obj_file(simplified_mesh_path)
     # compute the cloese face on the oringinal mesh for each vertex on the remeshed mesh
+    closest_faces = compute_closest_faces(
+        vertices, remeshed_verts, faces)  # (Nof,)
+    # project remeshed vertices to the closest face on the original mesh
+    projected_verts = project_point_onto_plane(
+        remeshed_verts, vertices, faces, closest_faces)
+    # compute the barycentric coordinates for each vertex on the remeshed mesh
+    barycentric_coords = compute_barycentric_coords(
+        projected_verts, closest_faces, vertices, faces)
     # compute the Jfeature on the remeshed mesh using barycentric coordinates
-
-    pass
+    remeshed_jfeatures = np.sum(np.expand_dims(
+        barycentric_coords, axis=-1) * jfeatures[faces[closest_faces] - 1], axis=1)
+    # save the remeshed Jfeature
+    np.save(
+        f'/workspace/data/merged/raw/{file_index}_simpilified_jfeature.npy', remeshed_jfeatures)
 
 
 if __name__ == '__main__':
