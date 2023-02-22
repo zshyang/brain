@@ -14,7 +14,6 @@ import numpy as np
 import pytorch3d.loss
 import torch
 import torch.optim as optim
-
 from dataset import Dataset
 from model import Network
 from options import options, update_options
@@ -136,7 +135,8 @@ class PointNetVAETrainer():
 
     def _post_process_dict_metric(self):
         list_chamfer = self.dict_metric['chamfer_dist']
-        self.dict_metric['mean_chamfer'] = sum(list_chamfer) / len(list_chamfer)
+        self.dict_metric['mean_chamfer'] = sum(
+            list_chamfer) / len(list_chamfer)
 
     def _val_update(self, split):
         ''' update to_restore during validation
@@ -158,7 +158,7 @@ class PointNetVAETrainer():
         p_string = ep_string + testa_string + besta_string
         print(p_string)
         self.logger.login(p_string)
-    
+
     def _post_train(self):
         if getattr(self.opt.train, 'save_at_train', False):
             self.to_restore['curr_ep'] = self.curr_ep
@@ -178,6 +178,7 @@ class PointNetVAETrainer():
                 self.curr_ep, save_dict
             )
 
+
 def _dict_cuda(dict_tensor):
     ''' this function is to move 
     a dict of tensors onto gpu
@@ -190,12 +191,14 @@ def _dict_cuda(dict_tensor):
         if type(dict_tensor[key]) is torch.Tensor:
             dict_tensor[key] = dict_tensor[key].cuda()
 
+
 def _cuda(in_data, target):
     ''' move input data and 
     target onto gpu
     '''
     _dict_cuda(in_data)
     _dict_cuda(target)
+
 
 def _criterion(pred, y, is_vae=False, kl_weight=0., **kwargs):
     ''' Compute the reconstruction loss and KLD if 
@@ -233,11 +236,15 @@ def _criterion(pred, y, is_vae=False, kl_weight=0., **kwargs):
     # self.to_restore['total_step'] += 1
 
     return loss
+
+
 def _pre_train():
     pass
 
+
 def _post_train():
     pass
+
 
 def train():
     for i in range(options.train.max_epoch + 1):
@@ -251,7 +258,7 @@ def train():
 
         for in_data, target in train_dataloader:
 
-        # for _ in range(len(self.train_data_provider)):
+            # for _ in range(len(self.train_data_provider)):
             # self.iter_start_time = time.time()
 
             net.train()
@@ -271,7 +278,7 @@ def train():
             # self.iter_data_time = time.time()
 
             # if getattr(self.opt.train, 'debug', False):
-                # break
+            # break
         _post_train()
         print(f'epoch: {i}, loos: {loss}')
 
@@ -300,7 +307,6 @@ def train():
         ckpt_path = f'/runtime/{i:03d}.pt'
         torch.save({'net': net.state_dict()}, ckpt_path)
 
-
     # remove the flag file
     print('=> finish the training!')
     # exit_file = os.path.join(
@@ -323,7 +329,7 @@ if __name__ == '__main__':
             train_dataset, str(train_op.dataloader.collate_fn), None
         )
         train_dataloader = torch.utils.data.DataLoader(
-            train_dataset, 
+            train_dataset,
             collate_fn=collate_fn,
             batch_size=train_op.dataloader.batch_size,
             drop_last=bool(train_op.dataloader.drop_last),
@@ -331,7 +337,7 @@ if __name__ == '__main__':
         )
 
     # make model
-    # model = 
+    # model =
     net = Network(**options.model.params).cuda()
     # net = nn.parallel.DistributedDataParallel(
     #     net, device_ids=[options.gpu],
