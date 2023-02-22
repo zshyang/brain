@@ -9,7 +9,7 @@ else
     echo $DEBUG" mode"
 fi
 
-singularity exec --nv --no-home \
+singularity exec --nv \
 --bind /scratch/zyang195/projects/brain/:/workspace/ \
 /scratch/zyang195/singularity/pytorch3d-0-4-0.simg \
 $SIMG_SCRIPTS_DIR/python.sh $DEBUG $SIMG_DIR
