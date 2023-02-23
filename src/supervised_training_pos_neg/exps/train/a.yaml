@@ -28,11 +28,11 @@ data:
 model:
   # from_basic_blocks: models/modelnet40/meshnet2/ssl_mae/0_3.yaml
   lib: Network
-  name: modelnet40_meshnet2_ssl_mae
+  name: null
   params:
     en_config:
       num_faces: 8192
-      num_cls: 40
+      num_cls: 2
       cfg:
         num_kernel: 64
         ConvSurface:
