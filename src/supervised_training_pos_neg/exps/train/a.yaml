@@ -97,7 +97,7 @@ optim:
       gamma: 0.5
 train:
   # from_basic_blocks: trainers/modelnet40/meshnet2/ssl_rec_att.yaml
-  max_epoch: 200
+  max_epoch: 200000
   train_freq: 5
   save_at_train: true
   # debug: true

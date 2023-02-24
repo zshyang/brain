@@ -18,6 +18,7 @@ import torch
 import torch.nn.functional as F
 import torch.optim as optim
 from dataset import Dataset
+from early_stop import EarlyStopping, Stop_args
 from options import options, update_options
 from writer import Writer
 
@@ -195,6 +196,11 @@ if __name__ == '__main__':
         'log.txt', os.path.join('/workspace/runtime', options.outf)
     )
 
+    stopping_args = Stop_args(
+        patience=100, max_epochs=options.train.max_epoch+1)
+    early_stopping = EarlyStopping(net, **stopping_args)
+
+    epoch = 0
     for epoch in range(options.train.max_epoch + 1):
         train()
         validate()
@@ -204,6 +210,13 @@ if __name__ == '__main__':
         writer.summarize(epoch, 'val')
         writer.summarize(epoch, 'test')
 
-    writer.draw_curve(options.train.max_epoch)
+        if early_stopping.check(
+            [writer.data[epoch]['val_average_accuracy'],
+             writer.data[epoch]['val_average_loss']], epoch
+        ):
+            writer.write('early stop\n')
+            break
+
+    writer.draw_curve(epoch)
 
     writer.close()
