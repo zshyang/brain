@@ -59,7 +59,6 @@ class Network(nn.Module):
 
         # ---- find max
         fea = torch.max(fea_in, dim=2)[0]
-        print(fea.dsfdsf())
 
         y = self.classifier(fea)
 

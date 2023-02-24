@@ -1,4 +1,4 @@
-outf: shapenetpart/meshnet2/ssl_mae/0_3/
+outf: supervised_training_pos_neg/exps/train
 timelimit: -1
 timescale: 1.3
 logger:
@@ -11,7 +11,7 @@ data:
   train:
     dataset:
       params:
-        debug: true
+        debug: false
         debug_load_num: 16
         data_root: /workspace/data/merged/
         meta_file: meta_pos_neg.json
@@ -23,8 +23,36 @@ data:
       num_workers: 4
       drop_last: 0
       shuffle: 1
-  val: null
-  test: null
+  val:
+    dataset:
+      params:
+        debug: false
+        debug_load_num: 16
+        data_root: /workspace/data/merged/
+        meta_file: meta_pos_neg.json
+        processed_root: /workspace/data/merged/processed/
+        stage: val
+    dataloader:
+      collate_fn: __collate__
+      batch_size: 4
+      num_workers: 4
+      drop_last: 0
+      shuffle: 0
+  test:
+    dataset:
+      params:
+        debug: false
+        debug_load_num: 16
+        data_root: /workspace/data/merged/
+        meta_file: meta_pos_neg.json
+        processed_root: /workspace/data/merged/processed/
+        stage: test
+    dataloader:
+      collate_fn: __collate__
+      batch_size: 4
+      num_workers: 4
+      drop_last: 0
+      shuffle: 0
 model:
   # from_basic_blocks: models/modelnet40/meshnet2/ssl_mae/0_3.yaml
   lib: Network
@@ -69,7 +97,7 @@ optim:
       gamma: 0.5
 train:
   # from_basic_blocks: trainers/modelnet40/meshnet2/ssl_rec_att.yaml
-  max_epoch: 2
+  max_epoch: 200
   train_freq: 5
   save_at_train: true
   # debug: true
