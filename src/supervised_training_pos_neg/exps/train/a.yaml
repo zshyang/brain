@@ -19,7 +19,7 @@ data:
         stage: train
     dataloader:
       collate_fn: __collate__
-      batch_size: 4
+      batch_size: 16
       num_workers: 4
       drop_last: 0
       shuffle: 1
@@ -34,7 +34,7 @@ data:
         stage: val
     dataloader:
       collate_fn: __collate__
-      batch_size: 4
+      batch_size: 16
       num_workers: 4
       drop_last: 0
       shuffle: 0
@@ -49,7 +49,7 @@ data:
         stage: test
     dataloader:
       collate_fn: __collate__
-      batch_size: 4
+      batch_size: 16
       num_workers: 4
       drop_last: 0
       shuffle: 0
