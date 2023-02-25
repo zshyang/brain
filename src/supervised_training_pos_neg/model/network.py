@@ -37,9 +37,10 @@ class Network(nn.Module):
 
         self.point_descriptor = PointDescriptor(num_kernel)
         self.normal_descriptor = NormalDescriptor(num_kernel)
-        self.conv_surface_1 = ConvSurface(num_faces, 3, conv_surface_cfg)
+        # self.conv_surface_1 = ConvSurface(num_faces, 3, conv_surface_cfg)
 
-        in_channel = num_kernel * 2 + conv_surface_num_kernel
+        # in_channel = num_kernel * 2 + conv_surface_num_kernel
+        in_channel = num_kernel * 2 
 
         # ---- classifier
         num_cls = safe_get(en_config, 'num_cls')
@@ -53,9 +54,10 @@ class Network(nn.Module):
 
         normals_fea = self.normal_descriptor(normals=normals)
 
-        surface_fea_1 = self.conv_surface_1(verts, faces, ring_1, centers)
+        # surface_fea_1 = self.conv_surface_1(verts, faces, ring_1, centers)
 
-        fea_in = torch.cat([points_fea, surface_fea_1, normals_fea], 1)
+        # fea_in = torch.cat([points_fea, surface_fea_1, normals_fea], 1)
+        fea_in = torch.cat([points_fea, normals_fea], 1)
 
         # ---- find max
         fea = torch.max(fea_in, dim=2)[0]
